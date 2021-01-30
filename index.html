@@ -129,22 +129,40 @@
                     <td><span id="bookingEconomyQuantity">0</span></td>
                     <td>$<span id="bookingEconomyCostInfo">0</span></td>
                 </tr>
+
                 <tr>
-                    <td>Tax</td>
+                    <td><b>Sub Total</b></td>
                     <td></td>
-                    <td>$<span id="bookingTax"></span></td>
+                    <td><b>$<span id="bookingSubTotal">0</span></b></td>
+                </tr>
+
+                <tr>
+                    <td><b>Tax</b></td>
+                    <td></td>
+                    <td><b>$<span id="bookingTax"></span></b></td>
                 </tr>
                 <tr>
                     <td class="border-bottom"><b>Total</b></td>
                     <td  class="border-bottom" ></td>
                     <td  class="border-bottom"><b> $<span id ="bookingTotalCost"  ></span></b></td>
                 </tr>
+
+                <tr>
+                    <td class="border-bottom"></td>
+                    <td  class="border-bottom" >
+                        <button onclick="alert('Order Confirm.')" > Confirmed </button>
+                    </td>
+                    <td  class="border-bottom"></td>
+                </tr>
+
             </table>
         </div>
     </main>
 
     <!--Thank You-->
 <script>
+
+//  booking quantity
 
 function ticketHandel(ticketType, isIncrease){
     const quantityNumber = document.getElementById(ticketType+'Quantity');
@@ -159,7 +177,7 @@ function ticketHandel(ticketType, isIncrease){
     quantityNumber.value = newQuantity;
     ticketCalculation();
   }
-
+//cost calculation
 function ticketCalculation(){
     const firstClassNumber = parseInt(document.getElementById('firstQuantity').value);
     const economyClassNumber = parseInt(document.getElementById('economyQuantity').value);
@@ -170,6 +188,8 @@ function ticketCalculation(){
     const totalCost = ticketCost + taxCost;
     document.getElementById('totalCost').innerText = totalCost;
 }
+
+//  booking information
 
 document.getElementById('bookNow').addEventListener('click',function(){
     const totalCost = parseInt(document.getElementById('totalCost').innerText);
@@ -187,24 +207,22 @@ document.getElementById('bookNow').addEventListener('click',function(){
     const bookingEconomyCost = economyQuantity*100;
     document.getElementById('bookingEconomyCostInfo').innerText = bookingEconomyCost;
 
+    const bookingSubTotal = parseInt(document.getElementById('ticketPrice').innerText);
+    document.getElementById('bookingSubTotal').innerText = bookingSubTotal;
+
     const taxAdd = parseInt(document.getElementById('taxAdd').innerText);
     document.getElementById('bookingTax').innerText = taxAdd;
+
     const totalCost = parseInt(document.getElementById('totalCost').innerText);
     document.getElementById('bookingTotalCost').innerText = totalCost;
 
-
-     var bookingInformation= document.getElementById('booking-information');
-     bookingInformation.style.display="block";
-     var bookingForm= document.querySelector('.booking-form');
-     bookingForm.style.display="none";
+    var bookingInformation = document.getElementById('booking-information');
+    bookingInformation.style.display = "block";
+    var bookingForm = document.querySelector('.booking-form');
+    bookingForm.style.display = "none";
 
     }
 })
-
-
-
-
-
 
 </script>
 
