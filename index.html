@@ -91,13 +91,12 @@
                         <p>$<span id ="ticketPrice">0</span></p>
                     </div>
                 </div>
-
                 <div class="amount">
                     <div class="left">
                         <p>Charge 10% VAT</p>
                     </div>
                     <div class="right">
-                        <p>$50</p>
+                        <p>$<span id="taxAdd">0</span></p>
                     </div>
                 </div>
                 <hr>
@@ -106,76 +105,108 @@
                         <h4>Total</h4>
                     </div>
                     <div class="right">
-                        <p>$550</p>
+                        <p>$<span id="totalCost" >0</span></p>
                     </div>
                 </div>
             </div>
-            <button class="btn-style">Book Now</button>
+            <button class="btn-style" id="bookNow">Book Now</button>
+        </div>
+
+        <div id="booking-information">
+            <table>
+                <tr>
+                    <th>Ticket Type</th>
+                    <th>Ticket Quantity</th>
+                    <th>Ticket Cost</th>
+                </tr>
+                <tr>
+                    <td>First Class</td>
+                    <td><span id="bookingFirstQuantity">0</span></td>
+                    <td>$<span id="bookingFirstCostInfo">0</span></td>
+                </tr>
+                <tr>
+                    <td>Economy Class</td>
+                    <td><span id="bookingEconomyQuantity">0</span></td>
+                    <td>$<span id="bookingEconomyCostInfo">0</span></td>
+                </tr>
+                <tr>
+                    <td>Tax</td>
+                    <td></td>
+                    <td>$<span id="bookingTax"></span></td>
+                </tr>
+                <tr>
+                    <td class="border-bottom"><b>Total</b></td>
+                    <td  class="border-bottom" ></td>
+                    <td  class="border-bottom"><b> $<span id ="bookingTotalCost"  ></span></b></td>
+                </tr>
+            </table>
         </div>
     </main>
 
     <!--Thank You-->
 <script>
 
-function ticketHandel(ticketType,isIncrease){
+function ticketHandel(ticketType, isIncrease){
     const quantityNumber = document.getElementById(ticketType+'Quantity');
     const quantityCount  = parseInt(quantityNumber.value);
     let newQuantity = quantityCount;
     if(isIncrease == true){
-        newQuantity = quantityCount + 1;
-        
+        newQuantity = quantityCount + 1;  
     }
     if(isIncrease == false && quantityCount > 0){
         newQuantity = quantityCount - 1;  
     }
     quantityNumber.value = newQuantity;
-    let ticketCost=0;
-    if(ticketType == 'first'){
-        ticketCost = newQuantity * 150;
-    }
-    if(ticketType == 'economy'){
-        ticketCost = newQuantity * 100;
-    }
-
-
-    //const ticketCost     = newQuantity * 150;
-    document.getElementById('ticketPrice').innerText = ticketCost;
+    ticketCalculation();
   }
 
+function ticketCalculation(){
+    const firstClassNumber = parseInt(document.getElementById('firstQuantity').value);
+    const economyClassNumber = parseInt(document.getElementById('economyQuantity').value);
+    const ticketCost =  firstClassNumber*150 + economyClassNumber*100;
+    document.getElementById('ticketPrice').innerText = ticketCost;
+    const taxCost = ticketCost*0.1;
+    document.getElementById('taxAdd').innerText = taxCost;
+    const totalCost = ticketCost + taxCost;
+    document.getElementById('totalCost').innerText = totalCost;
+}
+
+document.getElementById('bookNow').addEventListener('click',function(){
+    const totalCost = parseInt(document.getElementById('totalCost').innerText);
+    if(isNaN(totalCost) || totalCost == 0){
+        alert("Quantity Must Be Increase");
+    }else{
+
+    const firstQuantity = parseInt(document.getElementById('firstQuantity').value);
+    document.getElementById('bookingFirstQuantity').innerText = firstQuantity;
+    const bookingFirstCost = firstQuantity *150;
+    document.getElementById('bookingFirstCostInfo').innerText = bookingFirstCost;
+
+    const economyQuantity = parseInt(document.getElementById('economyQuantity').value);
+    document.getElementById('bookingEconomyQuantity').innerText = economyQuantity;
+    const bookingEconomyCost = economyQuantity*100;
+    document.getElementById('bookingEconomyCostInfo').innerText = bookingEconomyCost;
+
+    const taxAdd = parseInt(document.getElementById('taxAdd').innerText);
+    document.getElementById('bookingTax').innerText = taxAdd;
+    const totalCost = parseInt(document.getElementById('totalCost').innerText);
+    document.getElementById('bookingTotalCost').innerText = totalCost;
+
+
+     var bookingInformation= document.getElementById('booking-information');
+     bookingInformation.style.display="block";
+     var bookingForm= document.querySelector('.booking-form');
+     bookingForm.style.display="none";
+
+    }
+})
 
 
 
-//   document.getElementById('quantityIncrease').addEventListener('click',function(){
-//       const quantityNumber = document.getElementById('ticketQuantity');
-//       const quantityCount  = parseInt(quantityNumber.value);
-//       const newQuantity    = quantityCount + 1;
-//       quantityNumber.value = newQuantity;
-//       const ticketCost     = newQuantity * 150;
-//       document.getElementById('ticketPrice').innerText = ticketCost;
 
-//   })
-
-
-//   function ticketHandel(isIncrease){
-//     const quantityNumber = document.getElementById('ticketQuantity');
-//     const quantityCount  = parseInt(quantityNumber.value);
-//     let newQuantity = quantityCount;
-//     if(isIncrease == true){
-//         newQuantity = quantityCount + 1;
-//     }
-//     if(isIncrease == false && quantityCount > 0){
-//         newQuantity = quantityCount - 1;
-//     }
-//     //const newQuantity    = quantityCount - 1;
-//     quantityNumber.value = newQuantity;
-//     const ticketCost     = newQuantity * 150;
-//     document.getElementById('ticketPrice').innerText = ticketCost;
-//   }
 
 
 </script>
 
-
 </body>
-
 </html>

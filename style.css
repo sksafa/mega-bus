@@ -64,6 +64,7 @@ nav ul li a:hover, a.active{
     float: right;
     width: 80%;
     margin: 50px 0px 0px 80px;
+    display: block;
 }
 .booking-form h3{
     margin: 10px 0px;
@@ -137,4 +138,26 @@ nav ul li a:hover, a.active{
 }
 .quantity-button:hover{
     background-color: #255f09;
+}
+
+#booking-information{
+    background: #fff;
+    padding-left: 19px;
+    padding: 33px 23px;
+    margin-top: 20px;
+    display: none;
+}
+
+#booking-information th{
+    text-align: left;
+}
+#booking-information td{
+    border-bottom: 1px dotted #000;
+    padding-right: 107px;
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
+.border-bottom{
+    border-bottom: 0px !important;
 }
